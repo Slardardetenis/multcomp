@@ -14,6 +14,9 @@ anovi <- aov(durabilidade~composicao, data=dataset)
 
 anovo <- aov(durabilidade~tapete, data=dataset)
 
+mcHSD <- glht(anovo,linfct=mcp(tapete="Tukey"))
+
+
 servrer <- function(input,output){
   
   output$dados <- renderDataTable({dataset})
@@ -39,4 +42,24 @@ servrer <- function(input,output){
           data = dataset,
           outline = input$outliers)
   })
+  
+  formulaVerb <- reactive({
+    paste(input$test)
+  })
+  
+  output$caption1 <- renderText({
+    formulaVerb()
+  })
+  
+  output$anoverb <-renderPrint({
+    summary(glht(anovo,linfct=mcp(tapete=formulaVerb())))
+  })
+   
+  output$plotgg <- renderPlot({
+    plot(confint(glht(anovo,linfct=mcp(tapete=formulaVerb())),level=0.95))
+  })
+  
+#   output$group <- renderPrint({
+#     summary()
+#   })
 }

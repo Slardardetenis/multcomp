@@ -39,7 +39,11 @@ ui <- dashboardPage( skin = "purple",
                                     "Scheffe"="Scheffe",
                                     "Bonferroni"="Bonferroni"
                                    )
-                            )
+                            ),
+                h3(textOutput("caption1")),
+                verbatimTextOutput("anoverb"),
+                plotOutput("plotgg")
+                #verbatimTextOutput("group")
               )
             ),
       tabItem(tabName = "widgets",
