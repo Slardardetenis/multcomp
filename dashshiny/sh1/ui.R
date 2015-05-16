@@ -22,8 +22,8 @@ ui <- dashboardPage( skin = "purple",
     sidebarMenu(
       menuItem("dados", tabName = "dados", icon = icon("database")),
       menuItem("Anova", tabName = "widgets", icon = icon("th")),
-      menuItem("Comparações Múltiplas", tabName = "dashboard", icon = icon("bar-chart")),
-      menuItem("Box-Plot", tabName="comp", icon=icon("area-chart"))
+      menuItem("Box-Plot", tabName="comp", icon=icon("area-chart")),
+      menuItem("Comparações Múltiplas", tabName = "dashboard", icon = icon("bar-chart"))
             
       )
       ),
@@ -34,14 +34,14 @@ ui <- dashboardPage( skin = "purple",
       #first tab content
       tabItem(tabName = "dashboard",
       fluidRow(
-        box(plotOutput("plot1", height = 300)),
-      
-        box(
-          title = "Controles",
-          sliderInput("slider", "Number of observations", 1, 16, 8)
-          )  
-            )
-          ),
+                selectInput("test",h2("Teste:"),
+                              list("Tukey"="Tukey",
+                                    "Scheffe"="Scheffe",
+                                    "Bonferroni"="Bonferroni"
+                                   )
+                            )
+              )
+            ),
       tabItem(tabName = "widgets",
                 h2("Anova"),
                 verbatimTextOutput("anova"),h2("Vemos que o p-valor é menor do que 5%. Portanto rejeitamos a hipótese nula")
