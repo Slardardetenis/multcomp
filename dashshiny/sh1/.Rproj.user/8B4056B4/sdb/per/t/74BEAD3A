@@ -1,0 +1,17 @@
+{
+    "contents" : "## app.R ##\ndataset <- read.csv(\"/home/giovani/Área de Trabalho/carpet.csv\",h=T,\n                    col.names = c(\"durabilidade\",\"tapete\",\"composicao\"))\nattach(dataset)\ndataset$tapete <- as.factor(dataset$tapete)\ndataset$composicao <- as.factor(dataset$composicao)\n\nanovi <- aov(durabilidade~composicao, data=dataset)\n\nanovo <- aov(durabilidade~tapete, data=dataset)\n\nservrer <- function(input,output){\n  #set.seed(122)\n  histdata <- dataset$durabilidade\n  \n  output$plot1 <- renderPlot({\n    data <- histdata[seq_len(input$slider)]\n    hist(data)\n  })\n  \n  output$dados <- renderDataTable({dataset})\n  \n  output$anova <- renderPrint({\n    summary(anovo)\n  })\n  \n}",
+    "created" : 1431735807667.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4056430395",
+    "id" : "74BEAD3A",
+    "lastKnownWriteTime" : 1431759337,
+    "path" : "~/Área de Trabalho/dashshiny/sh1/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
