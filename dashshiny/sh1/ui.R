@@ -22,8 +22,8 @@ ui <- dashboardPage( skin = "purple",
     sidebarMenu(
       menuItem("dados", tabName = "dados", icon = icon("database")),
       menuItem("Anova", tabName = "widgets", icon = icon("th")),
-      menuItem("vapo", tabName = "dashboard", icon = icon("bar-chart")),
-      menuItem("comparações Multiplas", tabName="comp", icon=icon("area-chart"))
+      menuItem("Comparações Múltiplas", tabName = "dashboard", icon = icon("bar-chart")),
+      menuItem("Box-Plot", tabName="comp", icon=icon("area-chart"))
             
       )
       ),
@@ -48,6 +48,16 @@ ui <- dashboardPage( skin = "purple",
               ),
       tabItem(tabName = "dados", h2("Temos abaixo os dados"),
               dataTableOutput("dados")
+              ),
+      tabItem(tabName = "comp", h2("Box-Plot"),
+                selectInput("variable","Variável:",
+                              list("Tapete"= "tapete",
+                                    "composição" = "composicao"
+                                   )
+                            ),
+                checkboxInput("outliers", "Mostrar Outliers", FALSE),
+                h3(textOutput("caption")),
+                plotOutput("mpgPlot", width = 1000)
               )
         ),
     fluidRow(

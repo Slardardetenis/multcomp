@@ -1,4 +1,6 @@
 ## app.R ##
+library(shiny)
+library(datasets)
 dataset <- read.csv("/home/giovani/Área de Trabalho/carpet.csv",h=T,
                     col.names = c("durabilidade","tapete","composicao"))
 attach(dataset)
@@ -24,4 +26,21 @@ servrer <- function(input,output){
     summary(anovo)
   })
   
+  formulaText <- reactive({
+    paste("durabilidade~",input$variable)
+  })
+  
+  # Return the formula text for printing as a caption
+  output$caption <- renderText({
+    formulaText()
+  })
+  
+  # Generate a plot of the requested variable against durabilidade and only
+  # include outliers if requested
+  
+  output$mpgPlot <- renderPlot({
+    boxplot(as.formula(formulaText()),
+          data = dataset,
+          outline = input$outliers)
+  })
 }
