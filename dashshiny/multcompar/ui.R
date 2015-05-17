@@ -3,13 +3,14 @@ library(shiny)
 library(shinydashboard)
 
 
-ui <- dashboardPage( skin = "purple",
+ui <- dashboardPage( skin = "yellow",
   
   dashboardHeader(title="Multiple Comparisons",
                   dropdownMenu(type = "messages",icon = icon("question"),
                                messageItem(
                                  from = "Any questions?",
-                                 message = "do not forget to check out my code."
+                                 message = a(href="https://github.com/Slardardetenis/dashshiny", "do not forget to check out my code.")
+                                 
                                  
                                  
                                           )
@@ -34,7 +35,7 @@ ui <- dashboardPage( skin = "purple",
       #first tab content
       tabItem(tabName = "dashboard",
       fluidRow(
-                selectInput("test",h2("Teste:"),
+                selectInput("test",h2("Escolha o teste:"),
                               list("Tukey"="Tukey",
                                     "Scheffe"="Scheffe",
                                     "Bonferroni"="Bonferroni"
@@ -42,19 +43,19 @@ ui <- dashboardPage( skin = "purple",
                             ),
                 h3(textOutput("caption1")),
                 verbatimTextOutput("anoverb"),
-                plotOutput("plotgg")
+                plotOutput("plotgg", width = 1000)
                 #verbatimTextOutput("group")
               )
             ),
       tabItem(tabName = "widgets",
                 h2("Anova"),
-                verbatimTextOutput("anova"),h2("Vemos que o p-valor é menor do que 5%. Portanto rejeitamos a hipótese nula")
+                verbatimTextOutput("anova"),h2("p-valor<5%. Portanto rejeitamos a hipótese nula.")
               ),
-      tabItem(tabName = "dados", h2("Temos abaixo os dados"),
+      tabItem(tabName = "dados", h2("dados: Carpet"),
               dataTableOutput("dados")
               ),
       tabItem(tabName = "comp", h2("Box-Plot"),
-                selectInput("variable","Variável:",
+                selectInput("variable","Fator:",
                               list("Tapete"= "tapete",
                                     "composição" = "composicao"
                                    )
@@ -67,7 +68,8 @@ ui <- dashboardPage( skin = "purple",
     fluidRow(
       # A static box
       infoBox(icon = icon("beer"),
-              tags$a(href="https://github.com/Slardardetenis", "Made by Giovani (Slardar de tenis)")
+              tags$a(href="https://github.com/Slardardetenis/dashshiny", "Made by Giovani (Slardar de tenis)")
+              ,width=200
               )
       
     )
