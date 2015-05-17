@@ -4,7 +4,7 @@ library(datasets)
 library(agricolae)
 library(multcomp)
 
-dataset <- read.csv("/home/giovani/Área de Trabalho/carpet.csv",h=T,
+dataset <- read.csv("carpet.csv",h=T,
                     col.names = c("durabilidade","tapete","composicao"))
 attach(dataset)
 dataset$tapete <- as.factor(dataset$tapete)
